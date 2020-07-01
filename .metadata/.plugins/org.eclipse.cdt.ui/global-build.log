@@ -1,0 +1,14 @@
+14:14:39 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16780	     20	   1764	  18564	   4884	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+14:14:49 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  16780	     20	   1764	  18564	   4884	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
