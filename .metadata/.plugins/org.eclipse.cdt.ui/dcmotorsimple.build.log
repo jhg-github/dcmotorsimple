@@ -1,10 +1,34 @@
-14:14:49 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+21:42:17 **** Incremental Build of configuration Debug for project dcmotorsimple ****
 make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:11: warning: variable 'diff_array' set but not used [-Wunused-but-set-variable]
+  uint16_t diff_array[100];
+           ^~~~~~~~~~
+../Core/Src/main.c:80:18: warning: unused variable 'diff' [-Wunused-variable]
+  static uint16_t diff;
+                  ^~~~
+../Core/Src/main.c:78:21: warning: unused variable 'sConfig' [-Wunused-variable]
+  TIM_OC_InitTypeDef sConfig;
+                     ^~~~~~~
+../Core/Src/main.c:77:23: warning: unused variable 'TimHandle' [-Wunused-variable]
+  TIM_HandleTypeDef    TimHandle;
+                       ^~~~~~~~~
+At top level:
+../Core/Src/main.c:80:18: warning: 'diff' defined but not used [-Wunused-variable]
+  static uint16_t diff;
+                  ^~~~
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
 arm-none-eabi-size   dcmotorsimple.elf 
    text	   data	    bss	    dec	    hex	filename
-  16780	     20	   1764	  18564	   4884	dcmotorsimple.elf
+  18004	     24	   1832	  19860	   4d94	dcmotorsimple.elf
 Finished building: default.size.stdout
  
+Finished building: dcmotorsimple.list
+ 
 
-14:14:51 Build Finished. 0 errors, 0 warnings. (took 1s.103ms)
+21:42:19 Build Finished. 0 errors, 5 warnings. (took 2s.20ms)
 
