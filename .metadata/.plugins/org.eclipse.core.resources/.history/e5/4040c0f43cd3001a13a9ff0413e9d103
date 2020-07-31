@@ -1,0 +1,20 @@
+/*
+ * com.c
+ *
+ *  Created on: Jul 31, 2020
+ *      Author: javi
+ */
+
+#include "com.h"
+#include "usart.h"
+
+
+void com_Test_SendBuffer( uint8_t * const buffer, const uint16_t size ){
+	uint16_t *u16buffer = (uint16_t *)buffer;
+	uint16_t i;
+
+	for(i=0;i<size;i++){
+		u16buffer[i]=i;
+	}
+
+}
