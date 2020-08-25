@@ -1,17 +1,10 @@
-21:08:57 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+19:51:16 **** Incremental Build of configuration Debug for project dcmotorsimple ****
 make -j4 all 
-arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
-arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: dcmotorsimple.elf
- 
-arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
 arm-none-eabi-size   dcmotorsimple.elf 
    text	   data	    bss	    dec	    hex	filename
-  18420	     24	   3832	  22276	   5704	dcmotorsimple.elf
+  21936	     20	   1908	  23864	   5d38	dcmotorsimple.elf
 Finished building: default.size.stdout
  
-Finished building: dcmotorsimple.list
- 
 
-21:08:59 Build Finished. 0 errors, 0 warnings. (took 1s.660ms)
+19:51:17 Build Finished. 0 errors, 0 warnings. (took 1s.83ms)
 

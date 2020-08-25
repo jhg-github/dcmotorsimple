@@ -1,88 +1,21 @@
-16:48:54 **** Incremental Build of configuration Debug for project dcmotorsimple ****
-make -j4 all 
-arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
-arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: dcmotorsimple.elf
- 
-arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
-arm-none-eabi-size   dcmotorsimple.elf 
-   text	   data	    bss	    dec	    hex	filename
-  18416	     24	   3832	  22272	   5700	dcmotorsimple.elf
-Finished building: default.size.stdout
- 
-Finished building: dcmotorsimple.list
- 
-16:49:01 **** Incremental Build of configuration Debug for project dcmotorsimple ****
-make -j4 all 
-arm-none-eabi-size   dcmotorsimple.elf 
-   text	   data	    bss	    dec	    hex	filename
-  18416	     24	   3832	  22272	   5700	dcmotorsimple.elf
-Finished building: default.size.stdout
- 
-20:57:45 **** Incremental Build of configuration Debug for project dcmotorsimple ****
-make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:81:11: warning: variable 'diff_array' set but not used [-Wunused-but-set-variable]
-  uint16_t diff_array[100];
-           ^~~~~~~~~~
-../Core/Src/main.c:78:18: warning: unused variable 'diff' [-Wunused-variable]
-  static uint16_t diff;
-                  ^~~~
-../Core/Src/main.c:76:21: warning: unused variable 'sConfig' [-Wunused-variable]
-  TIM_OC_InitTypeDef sConfig;
-                     ^~~~~~~
-../Core/Src/main.c:75:23: warning: unused variable 'TimHandle' [-Wunused-variable]
-  TIM_HandleTypeDef    TimHandle;
-                       ^~~~~~~~~
-At top level:
-../Core/Src/main.c:78:18: warning: 'diff' defined but not used [-Wunused-variable]
-  static uint16_t diff;
-                  ^~~~
-arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: dcmotorsimple.elf
- 
-arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
-arm-none-eabi-size   dcmotorsimple.elf 
-   text	   data	    bss	    dec	    hex	filename
-  18416	     24	   3832	  22272	   5700	dcmotorsimple.elf
-Finished building: default.size.stdout
- 
-Finished building: dcmotorsimple.list
- 
-20:59:48 **** Incremental Build of configuration Debug for project dcmotorsimple ****
-make -j4 all 
-arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
-arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: dcmotorsimple.elf
- 
-arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
-arm-none-eabi-size   dcmotorsimple.elf 
-   text	   data	    bss	    dec	    hex	filename
-  18416	     24	   3832	  22272	   5700	dcmotorsimple.elf
-Finished building: default.size.stdout
- 
-Finished building: dcmotorsimple.list
- 
-21:00:46 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+19:51:08 **** Incremental Build of configuration Debug for project dcmotorsimple ****
 make -j4 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:81:11: warning: variable 'diff_array' set but not used [-Wunused-but-set-variable]
+../Core/Src/main.c:84:11: warning: variable 'diff_array' set but not used [-Wunused-but-set-variable]
   uint16_t diff_array[100];
            ^~~~~~~~~~
-../Core/Src/main.c:78:18: warning: unused variable 'diff' [-Wunused-variable]
+../Core/Src/main.c:81:18: warning: unused variable 'diff' [-Wunused-variable]
   static uint16_t diff;
                   ^~~~
-../Core/Src/main.c:76:21: warning: unused variable 'sConfig' [-Wunused-variable]
+../Core/Src/main.c:79:21: warning: unused variable 'sConfig' [-Wunused-variable]
   TIM_OC_InitTypeDef sConfig;
                      ^~~~~~~
-../Core/Src/main.c:75:23: warning: unused variable 'TimHandle' [-Wunused-variable]
+../Core/Src/main.c:78:23: warning: unused variable 'TimHandle' [-Wunused-variable]
   TIM_HandleTypeDef    TimHandle;
                        ^~~~~~~~~
 At top level:
-../Core/Src/main.c:78:18: warning: 'diff' defined but not used [-Wunused-variable]
+../Core/Src/main.c:81:18: warning: 'diff' defined but not used [-Wunused-variable]
   static uint16_t diff;
                   ^~~~
 arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -91,126 +24,15 @@ Finished building target: dcmotorsimple.elf
 arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
 arm-none-eabi-size   dcmotorsimple.elf 
    text	   data	    bss	    dec	    hex	filename
-  18416	     24	   3832	  22272	   5700	dcmotorsimple.elf
+  21936	     20	   1908	  23864	   5d38	dcmotorsimple.elf
 Finished building: default.size.stdout
  
 Finished building: dcmotorsimple.list
  
-21:03:06 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+19:51:16 **** Incremental Build of configuration Debug for project dcmotorsimple ****
 make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:81:11: warning: variable 'diff_array' set but not used [-Wunused-but-set-variable]
-  uint16_t diff_array[100];
-           ^~~~~~~~~~
-../Core/Src/main.c:78:18: warning: unused variable 'diff' [-Wunused-variable]
-  static uint16_t diff;
-                  ^~~~
-../Core/Src/main.c:76:21: warning: unused variable 'sConfig' [-Wunused-variable]
-  TIM_OC_InitTypeDef sConfig;
-                     ^~~~~~~
-../Core/Src/main.c:75:23: warning: unused variable 'TimHandle' [-Wunused-variable]
-  TIM_HandleTypeDef    TimHandle;
-                       ^~~~~~~~~
-At top level:
-../Core/Src/main.c:78:18: warning: 'diff' defined but not used [-Wunused-variable]
-  static uint16_t diff;
-                  ^~~~
-arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: dcmotorsimple.elf
- 
-arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
 arm-none-eabi-size   dcmotorsimple.elf 
    text	   data	    bss	    dec	    hex	filename
-  18416	     24	   3832	  22272	   5700	dcmotorsimple.elf
+  21936	     20	   1908	  23864	   5d38	dcmotorsimple.elf
 Finished building: default.size.stdout
- 
-Finished building: dcmotorsimple.list
- 
-21:05:25 **** Incremental Build of configuration Debug for project dcmotorsimple ****
-make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:81:11: warning: variable 'diff_array' set but not used [-Wunused-but-set-variable]
-  uint16_t diff_array[100];
-           ^~~~~~~~~~
-../Core/Src/main.c:78:18: warning: unused variable 'diff' [-Wunused-variable]
-  static uint16_t diff;
-                  ^~~~
-../Core/Src/main.c:76:21: warning: unused variable 'sConfig' [-Wunused-variable]
-  TIM_OC_InitTypeDef sConfig;
-                     ^~~~~~~
-../Core/Src/main.c:75:23: warning: unused variable 'TimHandle' [-Wunused-variable]
-  TIM_HandleTypeDef    TimHandle;
-                       ^~~~~~~~~
-At top level:
-../Core/Src/main.c:78:18: warning: 'diff' defined but not used [-Wunused-variable]
-  static uint16_t diff;
-                  ^~~~
-arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: dcmotorsimple.elf
- 
-arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
-arm-none-eabi-size   dcmotorsimple.elf 
-   text	   data	    bss	    dec	    hex	filename
-  18416	     24	   3832	  22272	   5700	dcmotorsimple.elf
-Finished building: default.size.stdout
- 
-Finished building: dcmotorsimple.list
- 
-21:08:28 **** Incremental Build of configuration Debug for project dcmotorsimple ****
-make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
-../Core/Src/main.c: In function 'main':
-../Com/com.c: In function 'com_Test_SendBuffer':
-../Com/com.c:16:12: error: 'size' undeclared (first use in this function); did you mean 'size_t'?
-  for(i=0;i<size/2;i++){
-            ^~~~
-            size_t
-../Com/com.c:16:12: note: each undeclared identifier is reported only once for each function it appears in
-../Core/Src/main.c:81:11: warning: variable 'diff_array' set but not used [-Wunused-but-set-variable]
-  uint16_t diff_array[100];
-           ^~~~~~~~~~
-../Core/Src/main.c:78:18: warning: unused variable 'diff' [-Wunused-variable]
-  static uint16_t diff;
-                  ^~~~
-../Core/Src/main.c:76:21: warning: unused variable 'sConfig' [-Wunused-variable]
-  TIM_OC_InitTypeDef sConfig;
-                     ^~~~~~~
-../Core/Src/main.c:75:23: warning: unused variable 'TimHandle' [-Wunused-variable]
-  TIM_HandleTypeDef    TimHandle;
-                       ^~~~~~~~~
-At top level:
-../Core/Src/main.c:78:18: warning: 'diff' defined but not used [-Wunused-variable]
-  static uint16_t diff;
-                  ^~~~
-make: *** [Com/subdir.mk:18: Com/com.o] Error 1
-make: *** Waiting for unfinished jobs....
-"make -j4 all" terminated with exit code 2. Build might be incomplete.
-21:08:45 **** Incremental Build of configuration Debug for project dcmotorsimple ****
-make -j4 all 
-arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
-../Com/com.c: In function 'com_Test_SendBuffer':
-../Com/com.c:20:37: error: 'size' undeclared (first use in this function); did you mean 'size_t'?
-  HAL_UART_Transmit(&huart2, buffer, size, 5000);
-                                     ^~~~
-                                     size_t
-../Com/com.c:20:37: note: each undeclared identifier is reported only once for each function it appears in
-make: *** [Com/subdir.mk:18: Com/com.o] Error 1
-"make -j4 all" terminated with exit code 2. Build might be incomplete.
-21:08:57 **** Incremental Build of configuration Debug for project dcmotorsimple ****
-make -j4 all 
-arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
-arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: dcmotorsimple.elf
- 
-arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
-arm-none-eabi-size   dcmotorsimple.elf 
-   text	   data	    bss	    dec	    hex	filename
-  18420	     24	   3832	  22276	   5704	dcmotorsimple.elf
-Finished building: default.size.stdout
- 
-Finished building: dcmotorsimple.list
  

@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -63,6 +64,8 @@ void SystemClock_Config(void);
 static volatile uint16_t val = 3599;
 static uint16_t buffer[1000];
 
+__IO uint16_t uhADCxConvertedValue = 0;
+
 /* USER CODE END 0 */
 
 /**
@@ -105,7 +108,43 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM16_Init();
   MX_TIM1_Init();
+  MX_ADC2_Init();
   /* USER CODE BEGIN 2 */
+
+  /* Run the ADC calibration in single-ended mode */
+  if (HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED) != HAL_OK)
+  {
+    /* Calibration Error */
+    Error_Handler();
+  }
+  /* Infinite loop */
+    while (1)
+    {
+
+      /*##-3- Start the conversion process #######################################*/
+      if (HAL_ADC_Start(&hadc2) != HAL_OK)
+      {
+        /* Start Conversation Error */
+        Error_Handler();
+      }
+
+      /*##-4- Wait for the end of conversion #####################################*/
+      /*  For simplicity reasons, this example is just waiting till the end of the
+      conversion, but application may perform other tasks while conversion
+      operation is ongoing. */
+      if (HAL_ADC_PollForConversion(&hadc2, 10) != HAL_OK)
+      {
+        /* End Of Conversion flag not set on time */
+        Error_Handler();
+      }
+      else
+      {
+        /* ADC conversion completed */
+        /*##-5- Get the converted value of regular channel  ######################*/
+        uhADCxConvertedValue = HAL_ADC_GetValue(&hadc2);
+      }
+    }
+
 
   com_Test_SendBuffer( (uint8_t *)buffer, 2000);
 
