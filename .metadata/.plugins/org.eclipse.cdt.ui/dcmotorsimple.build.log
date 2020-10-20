@@ -1,10 +1,10 @@
-19:51:16 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+11:47:16 **** Incremental Build of configuration Debug for project dcmotorsimple ****
 make -j4 all 
 arm-none-eabi-size   dcmotorsimple.elf 
    text	   data	    bss	    dec	    hex	filename
-  21936	     20	   1908	  23864	   5d38	dcmotorsimple.elf
+  16724	     20	   1844	  18588	   489c	dcmotorsimple.elf
 Finished building: default.size.stdout
  
 
-19:51:17 Build Finished. 0 errors, 0 warnings. (took 1s.83ms)
+11:47:18 Build Finished. 0 errors, 0 warnings. (took 1s.142ms)
 

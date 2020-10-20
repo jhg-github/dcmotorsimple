@@ -36,7 +36,6 @@
         * Output
         * EVENT_OUT
         * EXTI
-     PC7   ------> S_TIM3_CH2
 */
 void MX_GPIO_Init(void)
 {
@@ -54,7 +53,7 @@ void MX_GPIO_Init(void)
   LL_GPIO_ResetOutputPin(GPIOA, LD2_Pin|EN_A_Pin);
 
   /**/
-  LL_GPIO_ResetOutputPin(IN2_A_GPIO_Port, IN2_A_Pin);
+  LL_GPIO_ResetOutputPin(GPIOB, IN1_A_Pin|IN2_A_Pin);
 
   /**/
   LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTC, LL_SYSCFG_EXTI_LINE13);
@@ -82,21 +81,12 @@ void MX_GPIO_Init(void)
   LL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /**/
-  GPIO_InitStruct.Pin = LL_GPIO_PIN_7;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
-  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
-  GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
-  GPIO_InitStruct.Alternate = LL_GPIO_AF_2;
-  LL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /**/
-  GPIO_InitStruct.Pin = IN2_A_Pin;
+  GPIO_InitStruct.Pin = IN1_A_Pin|IN2_A_Pin;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
-  LL_GPIO_Init(IN2_A_GPIO_Port, &GPIO_InitStruct);
+  LL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 

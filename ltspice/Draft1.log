@@ -1,0 +1,21 @@
+Circuit: * Z:\home\javi\github_projects\dcmotorsimple\ltspice\Draft1.asc
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Mon Sep 14 20:57:14 2020
+Total elapsed time: 0.921 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 206818
+traniter = 206811
+tranpoints = 66099
+accept = 47659
+rejected = 18440
+matrix size = 11
+fillins = 0
+solver = Normal
+Matrix Compiler1: 494 bytes object code size  0.4/0.2/[0.2]
+Matrix Compiler2: off  [0.2]/0.3/0.2
+

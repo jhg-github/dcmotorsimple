@@ -86,8 +86,8 @@ void Error_Handler(void);
 #define TCK_GPIO_Port GPIOA
 #define SWO_Pin LL_GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
-#define IN1_A_PWM_Pin LL_GPIO_PIN_4
-#define IN1_A_PWM_GPIO_Port GPIOB
+#define IN1_A_Pin LL_GPIO_PIN_4
+#define IN1_A_GPIO_Port GPIOB
 #define IN2_A_Pin LL_GPIO_PIN_5
 #define IN2_A_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
