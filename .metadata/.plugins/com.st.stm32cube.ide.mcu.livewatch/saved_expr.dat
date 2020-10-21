@@ -1,2 +1,3 @@
-diff
-uhADCxConvertedValue
+adcValue
+adcValue_mV
+adcValue_mA

@@ -70,26 +70,26 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define B1_Pin LL_GPIO_PIN_13
 #define B1_GPIO_Port GPIOC
+#define EN_B_Pin LL_GPIO_PIN_1
+#define EN_B_GPIO_Port GPIOC
+#define IN1_B_Pin LL_GPIO_PIN_0
+#define IN1_B_GPIO_Port GPIOA
+#define IN2_B_Pin LL_GPIO_PIN_1
+#define IN2_B_GPIO_Port GPIOA
 #define USART_TX_Pin LL_GPIO_PIN_2
 #define USART_TX_GPIO_Port GPIOA
 #define USART_RX_Pin LL_GPIO_PIN_3
 #define USART_RX_GPIO_Port GPIOA
+#define ADC_SENSE_B_Pin LL_GPIO_PIN_4
+#define ADC_SENSE_B_GPIO_Port GPIOA
 #define LD2_Pin LL_GPIO_PIN_5
 #define LD2_GPIO_Port GPIOA
-#define SENSE_A_Pin LL_GPIO_PIN_6
-#define SENSE_A_GPIO_Port GPIOA
-#define EN_A_Pin LL_GPIO_PIN_10
-#define EN_A_GPIO_Port GPIOA
 #define TMS_Pin LL_GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin LL_GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
 #define SWO_Pin LL_GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
-#define IN1_A_Pin LL_GPIO_PIN_4
-#define IN1_A_GPIO_Port GPIOB
-#define IN2_A_Pin LL_GPIO_PIN_5
-#define IN2_A_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

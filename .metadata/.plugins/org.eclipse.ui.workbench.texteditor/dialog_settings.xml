@@ -7,6 +7,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="OPAMP_PGA_CONNECT_INVERTINGINPUT_IO0"/>
 		</list>
 		<list key="replacehistory">
 		</list>
@@ -16,6 +17,6 @@
 		<item key="DIALOG_Y_ORIGIN" value="233"/>
 		<item key="DIALOG_WIDTH" value="342"/>
 		<item key="DIALOG_HEIGHT" value="441"/>
-		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
+		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|10.019802|0|GTK|1|"/>
 	</section>
 </section>
