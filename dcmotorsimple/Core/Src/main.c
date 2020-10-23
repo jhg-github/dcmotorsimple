@@ -139,28 +139,51 @@ void SystemClock_Config(void);
 //		  while(1);
 //}
 
-void test_ContinuousSingleDirection(void){
-	LL_GPIO_SetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
-	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
-	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
-	while(1);
-}
+//void test_ContinuousSingleDirection(void){
+//	LL_GPIO_SetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+//	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+//	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//	while(1);
+//}
+//
+//__IO uint16_t adcValue = 0;
+//__IO float adcValue_mV = 0;
+//__IO float adcValue_mA = 0;
+//void test_ContinuousSingleDirectionADC(void){
+//	LL_GPIO_SetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+//	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+//	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
+//	while(1){
+//		HAL_ADC_Start(&hadc2);
+//		HAL_ADC_PollForConversion(&hadc2, 10);
+//		adcValue = HAL_ADC_GetValue(&hadc2);
+//		adcValue_mV = adcValue * 0.805664F;
+//		adcValue_mA = (adcValue_mV-40) / (31*0.05F);
+//	}
+//}
 
-__IO uint16_t adcValue = 0;
-__IO float adcValue_mV = 0;
-__IO float adcValue_mA = 0;
-void test_ContinuousSingleDirectionADC(void){
+
+#define N (1000)
+void test_mANoise(void){
+	uint16_t adcValue = 0;
+	float adcValue_mV = 0;
+	float adcValue_mA[N];
+	unsigned int index = N;
+
 	LL_GPIO_SetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
 	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
 	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
-	while(1){
+	while(index--){
 		HAL_ADC_Start(&hadc2);
 		HAL_ADC_PollForConversion(&hadc2, 10);
 		adcValue = HAL_ADC_GetValue(&hadc2);
 		adcValue_mV = adcValue * 0.805664F;
-		adcValue_mA = (adcValue_mV-40) / (31*0.05F);
+		adcValue_mA[index] = (adcValue_mV-40) / (31*0.05F);
 	}
+	com_Test_SendBuffer( (uint8_t *)&adcValue_mA[0] , 4*N);
+	while(1);
 }
 /* USER CODE END 0 */
 
@@ -178,14 +201,13 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+//  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+  /* Configure the system clock */  SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
 
@@ -199,7 +221,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   //test_ContinuousSingleDirection();
-  test_ContinuousSingleDirectionADC();
+  //test_ContinuousSingleDirectionADC();
+  test_mANoise();
 
   /* USER CODE END 2 */
 

@@ -427,3 +427,285 @@ Finished building: default.size.stdout
  
 Finished building: dcmotorsimple.list
  
+16:52:56 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18320	     20	   1852	  20192	   4ee0	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+17:00:49 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:168:6: error: redefinition of 'test_ContinuousSingleDirectionADC'
+ void test_ContinuousSingleDirectionADC(void){
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:152:6: note: previous definition of 'test_ContinuousSingleDirectionADC' was here
+ void test_ContinuousSingleDirectionADC(void){
+      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'test_ContinuousSingleDirectionADC':
+../Core/Src/main.c:171:8: warning: variable 'adcValue_mA' set but not used [-Wunused-but-set-variable]
+  float adcValue_mA[N];
+        ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:52: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:01:32 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'test_mANoise':
+../Core/Src/main.c:171:8: warning: variable 'adcValue_mA' set but not used [-Wunused-but-set-variable]
+  float adcValue_mA[N];
+        ^~~~~~~~~~~
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18352	     20	   1844	  20216	   4ef8	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+17:02:58 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'test_mANoise':
+../Core/Src/main.c:171:8: warning: variable 'adcValue_mA' set but not used [-Wunused-but-set-variable]
+  float adcValue_mA[N];
+        ^~~~~~~~~~~
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18360	     20	   1844	  20224	   4f00	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+17:03:41 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'test_mANoise':
+../Core/Src/main.c:171:8: warning: variable 'adcValue_mA' set but not used [-Wunused-but-set-variable]
+  float adcValue_mA[N];
+        ^~~~~~~~~~~
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18360	     20	   1844	  20224	   4f00	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+21:16:37 **** Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18748	     20	   1844	  20612	   5084	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+21:19:09 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
+../Com/com.c: In function 'com_Test_SendBuffer':
+../Com/com.c:14:11: warning: unused variable 'i' [-Wunused-variable]
+  uint16_t i;
+           ^
+../Com/com.c:13:12: warning: unused variable 'u16buffer' [-Wunused-variable]
+  uint16_t *u16buffer = (uint16_t *)buffer;
+            ^~~~~~~~~
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18712	     20	   1844	  20576	   5060	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+21:22:32 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
+../Com/com.c: In function 'com_Test_SendBuffer':
+../Com/com.c:14:11: warning: unused variable 'i' [-Wunused-variable]
+  uint16_t i;
+           ^
+../Com/com.c:13:12: warning: unused variable 'u16buffer' [-Wunused-variable]
+  uint16_t *u16buffer = (uint16_t *)buffer;
+            ^~~~~~~~~
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18704	     20	   1844	  20568	   5058	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+21:23:26 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18704	     20	   1844	  20568	   5058	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+21:30:30 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18740	     20	   1844	  20604	   507c	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+21:32:22 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18532	     20	   1844	  20396	   4fac	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+21:32:54 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18532	     20	   1844	  20396	   4fac	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+21:35:37 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18532	     20	   1844	  20396	   4fac	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+21:39:14 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
+../Com/com.c: In function 'com_Test_SendBuffer':
+../Com/com.c:13:12: warning: unused variable 'u16buffer' [-Wunused-variable]
+  uint16_t *u16buffer = (uint16_t *)buffer;
+            ^~~~~~~~~
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18580	     20	   1844	  20444	   4fdc	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+21:47:16 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
+../Com/com.c: In function 'com_Test_SendBuffer':
+../Com/com.c:13:12: warning: unused variable 'u16buffer' [-Wunused-variable]
+  uint16_t *u16buffer = (uint16_t *)buffer;
+            ^~~~~~~~~
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18572	     20	   1844	  20436	   4fd4	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+21:47:56 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
+../Com/com.c: In function 'com_Test_SendBuffer':
+../Com/com.c:13:12: warning: unused variable 'u16buffer' [-Wunused-variable]
+  uint16_t *u16buffer = (uint16_t *)buffer;
+            ^~~~~~~~~
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18548	     20	   1844	  20412	   4fbc	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+21:50:29 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Com/com.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Com/com.d" -MT"Com/com.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Com/com.o"
+../Com/com.c: In function 'com_Test_SendBuffer':
+../Com/com.c:15:8: warning: unused variable 'array' [-Wunused-variable]
+  float array[10];
+        ^~~~~
+../Com/com.c:14:11: warning: unused variable 'i' [-Wunused-variable]
+  uint16_t i;
+           ^
+../Com/com.c:13:12: warning: unused variable 'u16buffer' [-Wunused-variable]
+  uint16_t *u16buffer = (uint16_t *)buffer;
+            ^~~~~~~~~
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18488	     20	   1844	  20352	   4f80	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
+22:01:16 **** Incremental Build of configuration Debug for project dcmotorsimple ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "dcmotorsimple.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/javi/github_projects/dcmotorsimple/dcmotorsimple/STM32F303RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="dcmotorsimple.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: dcmotorsimple.elf
+ 
+arm-none-eabi-objdump -h -S  dcmotorsimple.elf  > "dcmotorsimple.list"
+arm-none-eabi-size   dcmotorsimple.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18488	     20	   1844	  20352	   4f80	dcmotorsimple.elf
+Finished building: default.size.stdout
+ 
+Finished building: dcmotorsimple.list
+ 
