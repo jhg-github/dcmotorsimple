@@ -164,7 +164,7 @@ void SystemClock_Config(void);
 //}
 
 
-#define N (1000)
+#define N (10000)
 void test_mANoise(void){
 	uint16_t adcValue = 0;
 	float adcValue_mV = 0;
@@ -174,8 +174,10 @@ void test_mANoise(void){
 	LL_GPIO_SetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
 	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+	HAL_Delay(1000);
 	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
 	while(index--){
+		HAL_Delay(1);
 		HAL_ADC_Start(&hadc2);
 		HAL_ADC_PollForConversion(&hadc2, 10);
 		adcValue = HAL_ADC_GetValue(&hadc2);
@@ -201,13 +203,14 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-//  HAL_Init();
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
 
-  /* Configure the system clock */  SystemClock_Config();
+  /* Configure the system clock */
+  SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
 

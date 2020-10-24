@@ -22,8 +22,10 @@ void com_Test_SendBuffer( uint8_t * const buffer, const uint16_t size_bytes ){
 //			array[i]=i*0.1F;
 //		}
 
-	while(1){
 	HAL_UART_Transmit(&huart2, buffer, size_bytes, 5000);
+
+	while(1){
+
 //	HAL_UART_Transmit(&huart2, (uint8_t * )&array[0], 40, 5000);
 	}
 
