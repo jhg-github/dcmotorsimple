@@ -40,5 +40,3 @@ print('stdev8', statistics.stdev(mavg8))
 plt.plot(mavg8,'.') 
 
 plt.show()
-
-# blablabla
