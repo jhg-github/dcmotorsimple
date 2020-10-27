@@ -72,8 +72,8 @@ void Error_Handler(void);
 #define B1_GPIO_Port GPIOC
 #define EN_B_Pin LL_GPIO_PIN_1
 #define EN_B_GPIO_Port GPIOC
-#define IN1_B_Pin LL_GPIO_PIN_0
-#define IN1_B_GPIO_Port GPIOA
+#define IN1_B_PWM_Pin LL_GPIO_PIN_0
+#define IN1_B_PWM_GPIO_Port GPIOA
 #define IN2_B_Pin LL_GPIO_PIN_1
 #define IN2_B_GPIO_Port GPIOA
 #define USART_TX_Pin LL_GPIO_PIN_2
@@ -84,6 +84,8 @@ void Error_Handler(void);
 #define ADC_SENSE_B_GPIO_Port GPIOA
 #define LD2_Pin LL_GPIO_PIN_5
 #define LD2_GPIO_Port GPIOA
+#define DEBUG_PIN_Pin LL_GPIO_PIN_10
+#define DEBUG_PIN_GPIO_Port GPIOA
 #define TMS_Pin LL_GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin LL_GPIO_PIN_14

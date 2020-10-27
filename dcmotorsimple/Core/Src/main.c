@@ -163,30 +163,48 @@ void SystemClock_Config(void);
 //	}
 //}
 
+//#define N (10000)
+//void test_mANoise(void){
+//	uint16_t adcValue = 0;
+//	float adcValue_mV = 0;
+//	float adcValue_mA[N];
+//	unsigned int index = N;
+//
+//	LL_GPIO_SetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+//	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+//	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//	HAL_Delay(1000);
+//	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
+//	while(index--){
+//		HAL_Delay(1);
+//		HAL_ADC_Start(&hadc2);
+//		HAL_ADC_PollForConversion(&hadc2, 10);
+//		adcValue = HAL_ADC_GetValue(&hadc2);
+//		adcValue_mV = adcValue * 0.805664F;
+//		adcValue_mA[index] = (adcValue_mV-40) / (31*0.05F);
+//	}
+//	com_Test_SendBuffer( (uint8_t *)&adcValue_mA[0] , 4*N);
+//	while(1);
+//}
 
-#define N (10000)
-void test_mANoise(void){
-	uint16_t adcValue = 0;
-	float adcValue_mV = 0;
-	float adcValue_mA[N];
-	unsigned int index = N;
-
-	LL_GPIO_SetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+void test_PwmSimple(void){
 	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
-	HAL_Delay(1000);
-	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
-	while(index--){
-		HAL_Delay(1);
-		HAL_ADC_Start(&hadc2);
-		HAL_ADC_PollForConversion(&hadc2, 10);
-		adcValue = HAL_ADC_GetValue(&hadc2);
-		adcValue_mV = adcValue * 0.805664F;
-		adcValue_mA[index] = (adcValue_mV-40) / (31*0.05F);
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 0);
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+	while(1){
+		HAL_Delay(5000);
+		LL_GPIO_SetOutputPin(DEBUG_PIN_GPIO_Port, DEBUG_PIN_Pin);
+		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 500);
+		HAL_Delay(500);
+		LL_GPIO_ResetOutputPin(DEBUG_PIN_GPIO_Port, DEBUG_PIN_Pin);
+		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 0);
+		LL_GPIO_ResetOutputPin(IN1_B_PWM_GPIO_Port, IN1_B_PWM_Pin);
 	}
-	com_Test_SendBuffer( (uint8_t *)&adcValue_mA[0] , 4*N);
-	while(1);
+	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
 }
+
 /* USER CODE END 0 */
 
 /**
@@ -219,13 +237,14 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
-  MX_TIM16_Init();
   MX_ADC2_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
   //test_ContinuousSingleDirection();
   //test_ContinuousSingleDirectionADC();
-  test_mANoise();
+  //test_mANoise();
+  test_PwmSimple();
 
   /* USER CODE END 2 */
 
@@ -276,9 +295,9 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2|RCC_PERIPHCLK_TIM16;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2|RCC_PERIPHCLK_TIM2;
   PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
-  PeriphClkInit.Tim16ClockSelection = RCC_TIM16CLK_HCLK;
+  PeriphClkInit.Tim2ClockSelection = RCC_TIM2CLK_HCLK;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
