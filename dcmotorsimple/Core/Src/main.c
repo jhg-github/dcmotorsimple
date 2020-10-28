@@ -187,22 +187,38 @@ void SystemClock_Config(void);
 //	while(1);
 //}
 
-void test_PwmSimple(void){
+//void test_PwmSimple(void){
+//	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+//	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 0);
+//	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+//	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//	while(1){
+//		HAL_Delay(5000);
+//		LL_GPIO_SetOutputPin(DEBUG_PIN_GPIO_Port, DEBUG_PIN_Pin);
+//		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 500);
+//		HAL_Delay(500);
+//		LL_GPIO_ResetOutputPin(DEBUG_PIN_GPIO_Port, DEBUG_PIN_Pin);
+//		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 0);
+//		LL_GPIO_ResetOutputPin(IN1_B_PWM_GPIO_Port, IN1_B_PWM_Pin);
+//	}
+//	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+//}
+
+__IO uint16_t adcValue = 0;
+void test_PwmADCSimple(void){
+	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
+
 	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
-	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 0);
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 500);
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+
 	while(1){
-		HAL_Delay(5000);
-		LL_GPIO_SetOutputPin(DEBUG_PIN_GPIO_Port, DEBUG_PIN_Pin);
-		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 500);
-		HAL_Delay(500);
-		LL_GPIO_ResetOutputPin(DEBUG_PIN_GPIO_Port, DEBUG_PIN_Pin);
-		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 0);
-		LL_GPIO_ResetOutputPin(IN1_B_PWM_GPIO_Port, IN1_B_PWM_Pin);
+		HAL_ADC_Start(&hadc2);
+		HAL_ADC_PollForConversion(&hadc2, 10);
+		adcValue = HAL_ADC_GetValue(&hadc2);
 	}
-	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
 }
 
 /* USER CODE END 0 */
@@ -244,7 +260,8 @@ int main(void)
   //test_ContinuousSingleDirection();
   //test_ContinuousSingleDirectionADC();
   //test_mANoise();
-  test_PwmSimple();
+  //test_PwmSimple();
+  test_PwmADCSimple();
 
   /* USER CODE END 2 */
 
