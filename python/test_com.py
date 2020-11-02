@@ -5,7 +5,7 @@ import statistics
 import numpy as np
 
 
-N = 10000
+N = 1000
 
 ser = serial.Serial('/dev/ttyACM0', 115200, timeout=100)
 ser.flushInput()

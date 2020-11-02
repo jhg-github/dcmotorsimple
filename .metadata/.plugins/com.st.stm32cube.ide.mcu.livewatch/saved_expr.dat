@@ -1,3 +1,3 @@
 adcValue
-adcValue * 0.805664F
-((adcValue * 0.805664F)-40)/(31*0.05)
+adcValue * 3.22265625F
+((adcValue * 3.22265625F)-43)/(31*0.05)

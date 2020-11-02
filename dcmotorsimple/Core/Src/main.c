@@ -206,19 +206,28 @@ void SystemClock_Config(void);
 //}
 
 __IO uint16_t adcValue = 0;
+#define N 1000
+float mA_Array[N];
 void test_PwmADCSimple(void){
+	uint16_t counter = 0;
 	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
 
 	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
-	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 500);
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 2000);
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
 
-	while(1){
+	while(counter < N){
 		HAL_ADC_Start(&hadc2);
 		HAL_ADC_PollForConversion(&hadc2, 10);
 		adcValue = HAL_ADC_GetValue(&hadc2);
+		adcValue = adcValue >> 2;
+		mA_Array[counter]=((adcValue * 3.22265625F)-43)/(31*0.05);
+		//mA_Array[counter]=((adcValue * 0.805664063F)-43)/(31*0.05);
+		counter++;
 	}
+	com_Test_SendBuffer( (uint8_t *)&mA_Array[0] , 4*N);
+	while(1);
 }
 
 /* USER CODE END 0 */
