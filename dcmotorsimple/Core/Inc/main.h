@@ -65,6 +65,8 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
+void pid(uint16_t adc);
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

@@ -1,0 +1,24 @@
+Circuit: * Z:\home\javi\github_projects\dcmotorsimple\ltspice\rc_pwm.asc
+
+WARNING: Node NC_01 is floating.
+
+WARNING: Less than two connections to node NC_01.  This node is used by R2.
+.OP point found by inspection.
+
+Date: Sat Oct 31 15:36:00 2020
+Total elapsed time: 0.108 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 9224
+traniter = 9224
+tranpoints = 4613
+accept = 3615
+rejected = 998
+matrix size = 5
+fillins = 0
+solver = Normal
+Matrix Compiler1: 96 bytes object code size  0.2/0.1/[0.1]
+Matrix Compiler2: 293 bytes object code size  0.1/0.1/[0.1]
+
