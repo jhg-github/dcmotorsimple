@@ -1,4 +1,0 @@
-adcValue
-adcValue * 3.22265625F
-((adcValue * 3.22265625F)-43)/(31*0.05)
-ADCValue
