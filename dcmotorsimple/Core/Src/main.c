@@ -230,22 +230,56 @@ void SystemClock_Config(void);
 //	while(1);
 //}
 
-static volatile float pid_setpoint = 0;
-//__IO float pid_Kp = 6.9F;
-//__IO float pid_KixTs = 0.7256F;
-//__IO float pid_lastError = 0;
-//__IO float pid_lastIntegral = 0;
-//__IO float pid_volts2pwm = 7199/3.3F;
-void test_pid(){
-	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
-	HAL_ADC_Start_IT(&hadc2);
-	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 4500);
-}
-void pid(uint16_t adc){
+//static volatile float pid_setpoint = 0;
+////__IO float pid_Kp = 6.9F;
+////__IO float pid_KixTs = 0.7256F;
+////__IO float pid_lastError = 0;
+////__IO float pid_lastIntegral = 0;
+////__IO float pid_volts2pwm = 7199/3.3F;
+//void test_pid(){
+//	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
+//	HAL_ADC_Start_IT(&hadc2);
+//	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 4500);
+//}
+//void pid(uint16_t adc){
+//}
 
+static volatile uint16_t duty = 300;
+void test_PWMBipolar(){
+//	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//	LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+//	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+//	HAL_Delay(500);
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, duty);
+//	LL_GPIO_SetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
+//	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+//	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+//	HAL_Delay(1);
+//	LL_GPIO_ResetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
+//	LL_GPIO_ResetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//	while(1){
+//		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
+//		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, duty);
+//	}
 
 }
+
+void test_pulse(){
+	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+	LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+	while(1){
+		HAL_Delay(5000);
+		LL_GPIO_SetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
+		LL_GPIO_SetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+		HAL_Delay(10);
+		LL_GPIO_ResetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
+		LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+	}
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -287,7 +321,9 @@ int main(void)
   //test_mANoise();
   //test_PwmSimple();
   //test_PwmADCSimple();
-  test_pid();
+//  test_pid();
+//  test_PWMBipolar();
+  test_pulse();
 
   /* USER CODE END 2 */
 
