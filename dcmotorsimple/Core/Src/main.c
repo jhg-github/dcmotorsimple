@@ -245,8 +245,8 @@ void SystemClock_Config(void);
 //void pid(uint16_t adc){
 //}
 
-static volatile uint16_t duty = 300;
-void test_PWMBipolar(){
+//static volatile uint16_t duty = 300;
+//void test_PWMBipolar(){
 //	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
 //	LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
 //	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
@@ -263,21 +263,47 @@ void test_PWMBipolar(){
 //		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
 //		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, duty);
 //	}
+//
+//}
 
-}
+//void test_pulse(){
+//	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//	LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+//	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+//	while(1){
+//		HAL_Delay(5000);
+//		LL_GPIO_SetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
+//		LL_GPIO_SetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+//		HAL_Delay(5);
+//		LL_GPIO_ResetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
+//		LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+//	}
+//}
 
-void test_pulse(){
+void test_pulsePWM(){
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
 	LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
 	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
-	while(1){
-		HAL_Delay(5000);
-		LL_GPIO_SetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
-		LL_GPIO_SetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
-		HAL_Delay(10);
-		LL_GPIO_ResetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
-		LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
-	}
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 0);
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 0);
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 1100);
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 1100);
+	LL_GPIO_SetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
+//	HAL_Delay(500);
+//	while(1){
+//		HAL_Delay(5000);
+//		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 1550);
+//		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 1550);
+//		LL_GPIO_SetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
+//		HAL_Delay(5);
+//		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 900);
+//		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 900);
+//		LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+//		LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+//		LL_GPIO_ResetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
+//	}
 }
 
 /* USER CODE END 0 */
@@ -323,7 +349,8 @@ int main(void)
   //test_PwmADCSimple();
 //  test_pid();
 //  test_PWMBipolar();
-  test_pulse();
+//  test_pulse();
+  test_pulsePWM();
 
   /* USER CODE END 2 */
 

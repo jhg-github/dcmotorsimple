@@ -1,0 +1,11 @@
+NewFile0 -> pwm 1790 50msdiv
+NewFile1 -> pwm 1790 20msdiv
+NewFile2 -> pwm 1110 20msdiv
+NewFile3 -> pwm 1110 50msdiv
+
+------------------------------
+NewFile0 -> 5 ms pulse
+NewFile1 -> pwm 1790 short
+NewFile2 -> pwm 1100 short
+NewFile3 -> pwm 1100 long
+NewFile4 -> pwm 1790 long

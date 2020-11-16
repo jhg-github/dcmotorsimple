@@ -1,7 +1,6 @@
 stm32f3xx_ll_gpio.h:879:22:LL_GPIO_SetOutputPin	16	static
 stm32f3xx_ll_gpio.h:908:22:LL_GPIO_ResetOutputPin	16	static
-main.c:249:6:test_PWMBipolar	4	static
-main.c:269:6:test_pulse	8	static
-main.c:289:5:main	8	static
-main.c:345:6:SystemClock_Config	160	static
-main.c:394:6:Error_Handler	4	static
+main.c:283:6:test_pulsePWM	8	static
+main.c:315:5:main	8	static
+main.c:372:6:SystemClock_Config	160	static
+main.c:421:6:Error_Handler	4	static
