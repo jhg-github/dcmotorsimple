@@ -319,6 +319,7 @@ void test_SYNC_PWM_ADC(){
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
 	HAL_TIM_OC_Start(&htim2, TIM_CHANNEL_3);
+//	HAL_TIM_OC_Start_IT(&htim2, TIM_CHANNEL_3);
 	while(1){
 		duty_adc = duty/2;
 		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
