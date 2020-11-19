@@ -7,6 +7,7 @@ C_SRCS += \
 ../Core/Src/adc.c \
 ../Core/Src/gpio.c \
 ../Core/Src/main.c \
+../Core/Src/opamp.c \
 ../Core/Src/stm32f3xx_hal_msp.c \
 ../Core/Src/stm32f3xx_it.c \
 ../Core/Src/sys.c \
@@ -20,6 +21,7 @@ OBJS += \
 ./Core/Src/adc.o \
 ./Core/Src/gpio.o \
 ./Core/Src/main.o \
+./Core/Src/opamp.o \
 ./Core/Src/stm32f3xx_hal_msp.o \
 ./Core/Src/stm32f3xx_it.o \
 ./Core/Src/sys.o \
@@ -33,6 +35,7 @@ C_DEPS += \
 ./Core/Src/adc.d \
 ./Core/Src/gpio.d \
 ./Core/Src/main.d \
+./Core/Src/opamp.d \
 ./Core/Src/stm32f3xx_hal_msp.d \
 ./Core/Src/stm32f3xx_it.d \
 ./Core/Src/sys.d \
@@ -50,6 +53,8 @@ Core/Src/gpio.o: ../Core/Src/gpio.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Core/Inc -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/CMSIS/Include -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/gpio.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/Src/main.o: ../Core/Src/main.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Core/Inc -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/CMSIS/Include -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+Core/Src/opamp.o: ../Core/Src/opamp.c
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Core/Inc -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/CMSIS/Include -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/opamp.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/Src/stm32f3xx_hal_msp.o: ../Core/Src/stm32f3xx_hal_msp.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F303xE -DUSE_FULL_LL_DRIVER -DDEBUG -c -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Inc -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Core/Inc -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/CMSIS/Include -I/home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f3xx_hal_msp.d" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 Core/Src/stm32f3xx_it.o: ../Core/Src/stm32f3xx_it.c

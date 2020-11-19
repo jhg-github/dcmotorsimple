@@ -1,5 +1,5 @@
-Drivers/STM32F3xx_HAL_Driver/stm32f3xx_hal_tim_ex.o: \
- /home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_tim_ex.c \
+Drivers/STM32F3xx_HAL_Driver/stm32f3xx_hal_opamp_ex.o: \
+ /home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_opamp_ex.c \
  /home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h \
  ../Core/Inc/stm32f3xx_hal_conf.h \
  /home/javi/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h \

@@ -87,6 +87,16 @@
 			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_i2c_ex.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/STM32F3xx_HAL_Driver/stm32f3xx_hal_opamp.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_opamp.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32F3xx_HAL_Driver/stm32f3xx_hal_opamp_ex.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_opamp_ex.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/STM32F3xx_HAL_Driver/stm32f3xx_hal_pwr.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-3-PROJECT_LOC%7D/STM32Cube/Repository/STM32Cube_FW_F3_V1.11.0/Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c</locationURI>

@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "opamp.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -311,6 +312,8 @@ static volatile uint16_t duty_adc;
 void test_SYNC_PWM_ADC(){
 	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
 	HAL_ADC_Start_IT(&hadc2);
+	HAL_OPAMP_SelfCalibrate(&hopamp2);
+	HAL_OPAMP_Start(&hopamp2);
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
 	duty_adc = duty/2;
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
@@ -361,6 +364,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_ADC2_Init();
   MX_TIM2_Init();
+  MX_OPAMP2_Init();
   /* USER CODE BEGIN 2 */
 
   //test_ContinuousSingleDirection();
