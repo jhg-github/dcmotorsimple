@@ -1,3 +1,3 @@
 opamp.c:30:6:MX_OPAMP2_Init	8	static
-opamp.c:47:6:HAL_OPAMP_MspInit	40	static
-opamp.c:73:6:HAL_OPAMP_MspDeInit	16	static
+opamp.c:47:6:HAL_OPAMP_MspInit	48	static
+opamp.c:79:6:HAL_OPAMP_MspDeInit	16	static

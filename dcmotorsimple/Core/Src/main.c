@@ -312,7 +312,7 @@ static volatile uint16_t duty_adc;
 void test_SYNC_PWM_ADC(){
 	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
 	HAL_ADC_Start_IT(&hadc2);
-	HAL_OPAMP_SelfCalibrate(&hopamp2);
+//	HAL_OPAMP_SelfCalibrate(&hopamp2);
 	HAL_OPAMP_Start(&hopamp2);
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
 	duty_adc = duty/2;
