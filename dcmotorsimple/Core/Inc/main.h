@@ -66,6 +66,7 @@ void Error_Handler(void);
 /* USER CODE BEGIN EFP */
 
 void pid(uint16_t adc);
+void test_isr(__IO uint16_t adcValue);
 
 /* USER CODE END EFP */
 

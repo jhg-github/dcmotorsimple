@@ -5,25 +5,24 @@ import statistics
 import numpy as np
 
 
-N = 1000
+N = 4000
 
 ser = serial.Serial('/dev/ttyACM0', 115200, timeout=100)
 ser.flushInput()
 ser.flushOutput()
-serBuffer = ser.read(4*N)
+serBuffer = ser.read(N)
 # print(serBuffer)
 
-# serBuffer = struct.unpack('>H', serBuffer)
-sub_fmt = '<f'
+sub_fmt = '<H'
 sub_size = struct.calcsize(sub_fmt)
 offset = 0
 serBuffer_bytes = []
-while offset < 4*N:
+while offset < N:
     serBuffer_bytes.append( struct.unpack_from(sub_fmt, serBuffer, offset)[0] )
     offset += sub_size
 
 # print(serBuffer_bytes)
-serBuffer_bytes=serBuffer_bytes[:8000]
+serBuffer_bytes=serBuffer_bytes[:N]
 
 print('mean', statistics.mean(serBuffer_bytes))
 print('stdev', statistics.stdev(serBuffer_bytes))
