@@ -315,17 +315,43 @@ static volatile uint16_t duty_adc;
 static uint16_t adcArray[ADC_ARRAY_SIZE_N];
 static volatile uint16_t index = 0;
 static bool array_full = false;
+static bool is_reading_offset = true;
+static uint16_t offset = 0;
 void test_isr(__IO uint16_t adcValue){
+	if(adcValue <= offset){
+		adcValue = 0;
+	}else{
+		adcValue -= offset;
+	}
 	adcArray[index++] = adcValue;
-	if(index == ADC_ARRAY_SIZE_N){
-		array_full = true;
+	if(is_reading_offset){
+		if(index == 16){
+			is_reading_offset = false;
+			array_full = true;
+		}
+	}else {
+		if(index == ADC_ARRAY_SIZE_N){
+			array_full = true;
+		}
 	}
 }
 void test_SYNC_PWM_ADC(){
+	int i=0;
 	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
-	HAL_ADC_Start_IT(&hadc2);
 	HAL_OPAMP_SelfCalibrate(&hopamp2);
 	HAL_OPAMP_Start(&hopamp2);
+	HAL_ADC_Start_IT(&hadc2);
+
+	HAL_TIM_OC_Start(&htim2, TIM_CHANNEL_3);
+	while(!array_full);
+	for(i=0;i<16;i++){
+		offset+=adcArray[i];
+	}
+	offset = offset >> 4;
+
+	array_full = false;
+
+
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
 	duty_adc = duty/2;
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
