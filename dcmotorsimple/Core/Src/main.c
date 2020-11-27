@@ -308,9 +308,9 @@ void SystemClock_Config(void);
 ////	}
 //}
 
-static volatile uint16_t duty = 2000;
+static volatile uint16_t duty = 3500;
 static volatile uint16_t duty_adc;
-#define ADC_ARRAY_SIZE_N (2000)
+#define ADC_ARRAY_SIZE_N (8000)
 #define ADC_ARRAY_SIZE_BYTES (ADC_ARRAY_SIZE_N*2)
 static uint16_t adcArray[ADC_ARRAY_SIZE_N];
 static volatile uint16_t index = 0;
@@ -369,6 +369,7 @@ void test_SYNC_PWM_ADC(){
 	LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
 	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
 	com_Test_SendBuffer( (uint8_t *)&adcArray[0] , ADC_ARRAY_SIZE_BYTES);
+//	com_Test_SendBuffer( (uint8_t *)&adcArray[0] , 50);
 }
 /* USER CODE END 0 */
 
