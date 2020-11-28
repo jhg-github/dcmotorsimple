@@ -41,6 +41,17 @@ serBuffer_uint=serBuffer_uint[:N]
 
 t = [ i/Fs for i in range(len(serBuffer_uint))]
 mA = [ ((((i * 3300) / 4096) / 16) / 0.05) for i in serBuffer_uint]
+
+rows=[]
+for i in range(len(t)):
+    rows.append('{};{}\n'.format(t[i],mA[i]))
+
+filename = 'pwm_100.csv'
+
+with open(filename, mode='w', newline='') as log_file:
+    log_file.write('t [s]; current [mA]\n')
+    log_file.writelines(rows)   
+
 plt.plot(t,mA,'.-') 
 # plt.plot(t,mA) 
 

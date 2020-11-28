@@ -308,7 +308,7 @@ void SystemClock_Config(void);
 ////	}
 //}
 
-static volatile uint16_t duty = 2000;
+static volatile uint16_t duty = 3500;
 static volatile uint16_t duty_adc;
 #define ADC_ARRAY_SIZE_N (8000)
 #define ADC_ARRAY_SIZE_BYTES (ADC_ARRAY_SIZE_N*2)
@@ -328,7 +328,11 @@ void test_SYNC_PWM_ADC(){
 	HAL_OPAMP_Start(&hopamp2);
 	HAL_ADC_Start_IT(&hadc2);
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
-	duty_adc = duty/2;
+	if(duty >= 1800){
+		duty_adc = duty/2;
+	}else {
+		duty_adc = ((3600 - duty)/2)+duty;
+	}
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, duty);
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, duty_adc);
