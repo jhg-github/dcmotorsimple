@@ -3,12 +3,14 @@ clear
 
 %-- signal --
 
-% T = readtable('../meas/step_current_adc/pwm_3500.csv', 'HeaderLines',1);
-% start=8;
-% finish=150;
-% t_delay=3.5e-4;
-% pwm =3500-1800;
-% gain = 1.7035
+Ts = 1/20000;
+
+T = readtable('../meas/step_current_adc/pwm_3500.csv', 'HeaderLines',1);
+start=8;
+finish=8000;
+t_delay=3.5e-4;
+pwm =3500-1800;
+gain = 1.7035
 
 % T = readtable('../meas/step_current_adc/pwm_2700.csv', 'HeaderLines',1);
 % start=8;
@@ -38,12 +40,12 @@ clear
 % pwm=1800-900;
 % gain = 1.7900
 
-T = readtable('../meas/step_current_adc/pwm_100.csv', 'HeaderLines',1);
-start=8;
-finish=150;
-t_delay=3.5e-4;
-pwm=1800-100;
-gain = 1.6912
+% T = readtable('../meas/step_current_adc/pwm_100.csv', 'HeaderLines',1);
+% start=8;
+% finish=150;
+% t_delay=3.5e-4;
+% pwm=1800-100;
+% gain = 1.6912
 
 
 t = T{start:finish,1};
@@ -65,7 +67,7 @@ hold on
 % plot(t,mA,'x')
 plot(t,adc)
 plot(t,input)
-step(G*pwm)
+% step(G*pwm)
 % step(G1)
 % step(G2)
 % step(G3)
