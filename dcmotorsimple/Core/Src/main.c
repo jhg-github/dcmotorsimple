@@ -308,47 +308,92 @@ void SystemClock_Config(void);
 ////	}
 //}
 
-static volatile uint16_t duty = 3500;
-static volatile uint16_t duty_adc;
-#define ADC_ARRAY_SIZE_N (8000)
-#define ADC_ARRAY_SIZE_BYTES (ADC_ARRAY_SIZE_N*2)
-static uint16_t adcArray[ADC_ARRAY_SIZE_N];
-static volatile uint16_t index = 0;
-static bool array_full = false;
-void test_isr(__IO uint16_t adcValue){
-	adcArray[index++] = adcValue;
-	if(index == ADC_ARRAY_SIZE_N){
-		array_full = true;
+//static volatile uint16_t duty = 3500;
+//static volatile uint16_t duty_adc;
+//#define ADC_ARRAY_SIZE_N (8000)
+//#define ADC_ARRAY_SIZE_BYTES (ADC_ARRAY_SIZE_N*2)
+//static uint16_t adcArray[ADC_ARRAY_SIZE_N];
+//static volatile uint16_t index = 0;
+//static bool array_full = false;
+//void test_isr(__IO uint16_t adcValue){
+//	adcArray[index++] = adcValue;
+//	if(index == ADC_ARRAY_SIZE_N){
+//		array_full = true;
+//	}
+//}
+//void test_SYNC_PWM_ADC(){
+//	int i=0;
+//	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
+//	HAL_OPAMP_SelfCalibrate(&hopamp2);
+//	HAL_OPAMP_Start(&hopamp2);
+//	HAL_ADC_Start_IT(&hadc2);
+//	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//	if(duty >= 1800){
+//		duty_adc = duty/2;
+//	}else {
+//		duty_adc = ((3600 - duty)/2)+duty;
+//	}
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, duty);
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, duty_adc);
+//	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+//	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+//	HAL_TIM_OC_Start(&htim2, TIM_CHANNEL_3);
+//	while(!array_full);
+//	HAL_ADC_Stop_IT(&hadc2);
+//	LL_GPIO_ResetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+//	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
+//	HAL_TIM_OC_Stop(&htim2, TIM_CHANNEL_3);
+//	LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+//	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+//	com_Test_SendBuffer( (uint8_t *)&adcArray[0] , ADC_ARRAY_SIZE_BYTES);
+//}
+
+
+static volatile float pid_setpoint = 198.0F;	// aprox 200mA
+static volatile float pid_Kp = 0.8F;
+static volatile float pid_KixTs = 0.15375F;
+static volatile float pid_lastError = 0.0F;
+static volatile float pid_lastIntegral = 0.0F;
+void pid_isr(__IO uint16_t adcValue){
+	uint16_t output;
+	float error;
+	float proportional;
+	float integral;
+
+	error = pid_setpoint - adcValue;
+	proportional = error * pid_Kp;
+	integral = pid_KixTs * pid_lastError + pid_lastIntegral;
+	if(integral > 1800.0F){
+		integral = 1800.0F;
+	}else if (integral < 0.0F){
+		integral = 0.0F;
 	}
+	output = (uint16_t)(proportional + integral);
+	pid_lastError = error;
+	pid_lastIntegral = integral;
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, output);
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, output);
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, output/2);
 }
-void test_SYNC_PWM_ADC(){
-	int i=0;
+void test_pid(){
+	uint16_t duty = 1800;
+	uint16_t duty_adc = duty/2;;
 	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
 	HAL_OPAMP_SelfCalibrate(&hopamp2);
 	HAL_OPAMP_Start(&hopamp2);
 	HAL_ADC_Start_IT(&hadc2);
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
-	if(duty >= 1800){
-		duty_adc = duty/2;
-	}else {
-		duty_adc = ((3600 - duty)/2)+duty;
-	}
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, duty);
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, duty_adc);
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
 	HAL_TIM_OC_Start(&htim2, TIM_CHANNEL_3);
-	while(!array_full);
-	HAL_ADC_Stop_IT(&hadc2);
-	LL_GPIO_ResetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
-	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
-	HAL_TIM_OC_Stop(&htim2, TIM_CHANNEL_3);
-	LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
-	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
-	com_Test_SendBuffer( (uint8_t *)&adcArray[0] , ADC_ARRAY_SIZE_BYTES);
+	while(true);
 }
+
 /* USER CODE END 0 */
 
 /**
@@ -395,7 +440,8 @@ int main(void)
 //  test_PWMBipolar();
 //  test_pulse();
 //  test_pulsePWM();
-  test_SYNC_PWM_ADC();
+//  test_SYNC_PWM_ADC();
+  test_pid();
 
   /* USER CODE END 2 */
 

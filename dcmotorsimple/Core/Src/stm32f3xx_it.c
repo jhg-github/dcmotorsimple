@@ -209,7 +209,8 @@ void ADC1_2_IRQHandler(void)
 	__HAL_ADC_CLEAR_FLAG(&hadc2, (ADC_FLAG_EOC | ADC_FLAG_EOS) );
 	LL_GPIO_SetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
 	ADCValue = HAL_ADC_GetValue(&hadc2);
-	test_isr(ADCValue);
+//	test_isr(ADCValue);
+	pid_isr(ADCValue);
 	LL_GPIO_ResetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
 
   /* USER CODE END ADC1_2_IRQn 0 */
