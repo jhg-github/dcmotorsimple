@@ -351,13 +351,20 @@ void SystemClock_Config(void);
 //}
 
 
-static volatile float pid_setpoint = 198.0F;	// aprox 200mA
+#define ADC_ARRAY_SIZE_N (8000)
+#define ADC_ARRAY_SIZE_BYTES (ADC_ARRAY_SIZE_N*2)
+static uint16_t adcArray[ADC_ARRAY_SIZE_N];
+static uint16_t outputArray[ADC_ARRAY_SIZE_N];
+static volatile uint16_t index = 0;
+
+static volatile float pid_setpoint = 500.0F;	// aprox 200mA
 static volatile float pid_Kp = 0.8F;
 static volatile float pid_KixTs = 0.15375F;
 static volatile float pid_lastError = 0.0F;
 static volatile float pid_lastIntegral = 0.0F;
+static volatile uint16_t output;
 void pid_isr(__IO uint16_t adcValue){
-	uint16_t output;
+	//uint16_t output;
 	float error;
 	float proportional;
 	float integral;
@@ -365,17 +372,37 @@ void pid_isr(__IO uint16_t adcValue){
 	error = pid_setpoint - adcValue;
 	proportional = error * pid_Kp;
 	integral = pid_KixTs * pid_lastError + pid_lastIntegral;
-	if(integral > 1800.0F){
-		integral = 1800.0F;
+	if(integral > 1799.0F){
+		integral = 1799.0F;
 	}else if (integral < 0.0F){
 		integral = 0.0F;
 	}
-	output = (uint16_t)(proportional + integral);
+	output = 1800 + (uint16_t)(proportional + integral);
+	if(output > 3599.0F){
+		output = 3599.0F;
+	}else if (output < 1800.0F){
+		output = 1800.0F;
+	}
 	pid_lastError = error;
 	pid_lastIntegral = integral;
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, output);
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, output);
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, output/2);
+
+	adcArray[index] = adcValue;
+	outputArray[index] = output;
+	index++;
+	if(index == ADC_ARRAY_SIZE_N){
+		HAL_ADC_Stop_IT(&hadc2);
+		LL_GPIO_ResetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+		HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+		HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
+		HAL_TIM_OC_Stop(&htim2, TIM_CHANNEL_3);
+		LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+		LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+		com_Test_SendBuffer( (uint8_t *)&adcArray[0] , ADC_ARRAY_SIZE_BYTES);
+		com_Test_SendBuffer( (uint8_t *)&outputArray[0] , ADC_ARRAY_SIZE_BYTES);
+	}
 }
 void test_pid(){
 	uint16_t duty = 1800;
@@ -384,7 +411,15 @@ void test_pid(){
 	HAL_OPAMP_SelfCalibrate(&hopamp2);
 	HAL_OPAMP_Start(&hopamp2);
 	HAL_ADC_Start_IT(&hadc2);
+
+	LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);//////////////////
+	LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);//////////////////
+
 	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+
+	HAL_Delay(100); //////////////////
+
+
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, duty);
 	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, duty_adc);
