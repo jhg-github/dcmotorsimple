@@ -358,8 +358,8 @@ static uint16_t outputArray[ADC_ARRAY_SIZE_N];
 static volatile uint16_t index = 0;
 
 static volatile float pid_setpoint = 500.0F;	// aprox 200mA
-static volatile float pid_Kp = 0.8F;
-static volatile float pid_KixTs = 0.15375F;
+static volatile float pid_Kp = 1.2F; //0.8F;
+static volatile float pid_KixTs = 0.06105F; // 1221×0,00005 // 0.15375F;
 static volatile float pid_lastError = 0.0F;
 static volatile float pid_lastIntegral = 0.0F;
 static volatile uint16_t output;

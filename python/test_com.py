@@ -10,6 +10,7 @@ N = 8000*DATA_SIZE_BYTES*2  # 2 buffers, adc and output
 Fs = 20000
 
 ser = serial.Serial('/dev/ttyACM0', 115200, timeout=100)
+ser.read_all()
 ser.flushInput()
 ser.flushOutput()
 serBuffer = ser.read(N)
@@ -59,5 +60,6 @@ for i in range(len(t)):
 
 plt.plot(t,mA,'.-') 
 plt.step(t,output, where='post')
+plt.tight_layout()
 plt.grid()
 plt.show()
