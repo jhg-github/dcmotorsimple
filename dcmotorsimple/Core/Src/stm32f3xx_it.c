@@ -214,7 +214,7 @@ void ADC1_2_IRQHandler(void)
 	LL_GPIO_ResetOutputPin(DEBUG_PIN_GPIO_Port,DEBUG_PIN_Pin);
 
   /* USER CODE END ADC1_2_IRQn 0 */
-//  HAL_ADC_IRQHandler(&hadc2);
+  //HAL_ADC_IRQHandler(&hadc2);
   /* USER CODE BEGIN ADC1_2_IRQn 1 */
 
   /* USER CODE END ADC1_2_IRQn 1 */
