@@ -31,6 +31,10 @@ encoder=serBuffer_uint
 
 
 t = [ i/Fs for i in range(len(encoder))]
+encoder_diff = np.diff(encoder)
+encoder_diff = np.insert(encoder_diff,0,0)
+encoder_diff = encoder_diff.tolist()
+print(type(encoder_diff))
 # mA = [ ((((i * 3300) / 4096) / 16) / 0.05) for i in adcBuffer_uint]
 # output = [ i - 1800 for i in outBuffer_uint]
 # output = outBuffer_uint
@@ -44,6 +48,7 @@ t = [ i/Fs for i in range(len(encoder))]
 #     log_file.writelines(rows)   
 
 plt.plot(t,encoder,'.-') 
+plt.plot(t,encoder_diff,'.-') 
 # plt.step(t,output, where='post')
 plt.tight_layout()
 plt.grid()

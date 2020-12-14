@@ -445,7 +445,7 @@ static volatile uint16_t index = 0;
 #define SPEED_LOOP_N (10)	// 20KHz / 10 -> 2Hz for speed control
 static volatile uint32_t speed_loop_counter = 0;
 
-static volatile float pid_setpoint = 500.0F;	// aprox 200mA
+static volatile float pid_setpoint = 1000.0F;	// aprox 200mA
 static volatile float pid_Kp = 1.2F; //0.8F;
 static volatile float pid_KixTs = 0.06105F; // 1221×0,00005 // 0.15375F;
 static volatile float pid_lastError = 0.0F;
@@ -494,6 +494,9 @@ void pid_isr(__IO uint16_t adcValue){
 		encoder = __HAL_TIM_GET_COUNTER(&htim3);
 		encArray[index] = encoder;
 		index++;
+		if(encoder > 10){
+			pid_setpoint = 25;
+		}
 		if(index == ENC_ARRAY_SIZE_N){
 			HAL_ADC_Stop_IT(&hadc2);
 			LL_GPIO_ResetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
