@@ -41,14 +41,15 @@ print(type(encoder_diff))
 
 # rows=[]
 # for i in range(len(t)):
-    # rows.append('{};{}\n'.format(t[i],mA[i]))
-# filename = 'pwm_100.csv'
+#     rows.append('{};{}\n'.format(t[i],encoder_diff[i]))
+# filename = 'speed_80.csv'
 # with open(filename, mode='w', newline='') as log_file:
-#     log_file.write('t [s]; current [mA]\n')
+#     log_file.write('t [s]; speed [encoder diff @ 1KHz]\n')
 #     log_file.writelines(rows)   
 
-plt.plot(t,encoder,'.-') 
+# plt.plot(t,encoder,'.-') 
 plt.plot(t,encoder_diff,'.-') 
+plt.plot(t, np.convolve(encoder_diff, np.ones(50)/50, mode='full')[:8000])
 # plt.step(t,output, where='post')
 plt.tight_layout()
 plt.grid()
