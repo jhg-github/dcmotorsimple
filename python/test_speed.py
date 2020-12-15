@@ -7,7 +7,7 @@ import numpy as np
 
 DATA_SIZE_BYTES = 2
 N = 8000*DATA_SIZE_BYTES*1  # 1 buffers, speed
-Fs = 2000
+Fs = 1000
 
 ser = serial.Serial('/dev/ttyACM0', 115200, timeout=20)
 ser.read_all()

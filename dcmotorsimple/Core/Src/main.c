@@ -442,7 +442,7 @@ void SystemClock_Config(void);
 #define ENC_ARRAY_SIZE_BYTES (ENC_ARRAY_SIZE_N*2)
 static uint16_t encArray[ENC_ARRAY_SIZE_N];
 static volatile uint16_t index = 0;
-#define SPEED_LOOP_N (10)	// 20KHz / 10 -> 2Hz for speed control
+#define SPEED_LOOP_N (20)	// 20KHz / 20 -> 1KHz for speed control
 static volatile uint32_t speed_loop_counter = 0;
 
 static volatile float pid_setpoint = 1000.0F;	// aprox 200mA
@@ -494,8 +494,8 @@ void pid_isr(__IO uint16_t adcValue){
 		encoder = __HAL_TIM_GET_COUNTER(&htim3);
 		encArray[index] = encoder;
 		index++;
-		if(encoder > 10){
-			pid_setpoint = 25;
+		if(encoder > 1){
+			pid_setpoint = 2;
 		}
 		if(index == ENC_ARRAY_SIZE_N){
 			HAL_ADC_Stop_IT(&hadc2);
