@@ -532,15 +532,88 @@ void SystemClock_Config(void);
 //}
 
 
-#define ADC_ARRAY_SIZE_N (8000)
-#define ADC_ARRAY_SIZE_BYTES (ADC_ARRAY_SIZE_N*2)
-static uint16_t adcArray[ADC_ARRAY_SIZE_N];
-static int16_t outputArray[ADC_ARRAY_SIZE_N];
-static volatile uint16_t index = 0;
+//#define ADC_ARRAY_SIZE_N (8000)
+//#define ADC_ARRAY_SIZE_BYTES (ADC_ARRAY_SIZE_N*2)
+//static uint16_t adcArray[ADC_ARRAY_SIZE_N];
+//static int16_t outputArray[ADC_ARRAY_SIZE_N];
+//static volatile uint16_t index = 0;
+//
+//static volatile int16_t output;
+//pid_Class pid_current;
+//void pid_isr(__IO uint16_t adcValue){
+//	if(pid_Get_Setpoint(&pid_current) >= 0){
+//		output = 1800 + (int16_t)pid_Calc_Output(&pid_current, adcValue);
+//	}else {
+//		output = 1800 + (int16_t)pid_Calc_Output(&pid_current, (float)-adcValue);
+//	}
+//	if(output > 3599.0F){
+//		output = 3599.0F;
+//	}else if (output < 0.0F){
+//		output = 0.0F;
+//	}
+//
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, output);
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, output);
+//	if(output >= 1800){
+//		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, output/2);
+//	}else{
+//		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, (3599 + output)/2);
+//	}
+//
+//	adcArray[index] = adcValue;
+//	outputArray[index] = output;
+//	index++;
+//	if(index == ADC_ARRAY_SIZE_N){
+//		HAL_ADC_Stop_IT(&hadc2);
+//		LL_GPIO_ResetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//		HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+//		HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
+//		HAL_TIM_OC_Stop(&htim2, TIM_CHANNEL_3);
+//		LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+//		LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+//		com_Test_SendBuffer( (uint8_t *)&adcArray[0] , ADC_ARRAY_SIZE_BYTES);
+//		com_Test_SendBuffer( (uint8_t *)&outputArray[0] , ADC_ARRAY_SIZE_BYTES);
+//	}
+//}
+//void test_pid_class(){
+//	uint16_t duty = 1800;
+//	uint16_t duty_adc = duty/2;;
+//
+//	pid_Ctor(&pid_current, 1.2F, 1221.0F, 0.0F, 0.00005F, 1799.0F, -1799.0F);
+//	pid_Set_Setpoint(&pid_current, 500.0F);
+//
+//	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
+//	HAL_OPAMP_SelfCalibrate(&hopamp2);
+//	HAL_OPAMP_Start(&hopamp2);
+//
+//	LL_GPIO_SetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+//
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, duty);
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, duty);
+//	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, duty_adc);
+//	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+//	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+//
+//	HAL_Delay(1000);
+//
+//	HAL_ADC_Start_IT(&hadc2);
+//	HAL_TIM_OC_Start(&htim2, TIM_CHANNEL_3);
+//	while(true);
+//}
 
-static volatile int16_t output;
+
+#define ENC_ARRAY_SIZE_N (8000)
+#define ENC_ARRAY_SIZE_BYTES (ENC_ARRAY_SIZE_N*2)
+static uint16_t encArray[ENC_ARRAY_SIZE_N];
+static volatile uint16_t index = 0;
+#define SPEED_LOOP_N (40)	// 20KHz / 40 -> 500Hz for speed control
+static volatile uint32_t speed_loop_counter = 0;
+
 pid_Class pid_current;
+static volatile int16_t output;
 void pid_isr(__IO uint16_t adcValue){
+	uint16_t encoder;
+
 	if(pid_Get_Setpoint(&pid_current) >= 0){
 		output = 1800 + (int16_t)pid_Calc_Output(&pid_current, adcValue);
 	}else {
@@ -560,22 +633,27 @@ void pid_isr(__IO uint16_t adcValue){
 		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, (3599 + output)/2);
 	}
 
-	adcArray[index] = adcValue;
-	outputArray[index] = output;
-	index++;
-	if(index == ADC_ARRAY_SIZE_N){
-		HAL_ADC_Stop_IT(&hadc2);
-		LL_GPIO_ResetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
-		HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
-		HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
-		HAL_TIM_OC_Stop(&htim2, TIM_CHANNEL_3);
-		LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
-		LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
-		com_Test_SendBuffer( (uint8_t *)&adcArray[0] , ADC_ARRAY_SIZE_BYTES);
-		com_Test_SendBuffer( (uint8_t *)&outputArray[0] , ADC_ARRAY_SIZE_BYTES);
+	if(++speed_loop_counter == SPEED_LOOP_N){
+		speed_loop_counter = 0;
+		encoder = __HAL_TIM_GET_COUNTER(&htim3);
+		encArray[index] = encoder;
+		index++;
+		if(encoder > 1){
+			pid_Set_Setpoint(&pid_current, 5.0F);
+		}
+		if(index == ENC_ARRAY_SIZE_N){
+			HAL_ADC_Stop_IT(&hadc2);
+			LL_GPIO_ResetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+			HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+			HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
+			HAL_TIM_OC_Stop(&htim2, TIM_CHANNEL_3);
+			LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+			LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+			com_Test_SendBuffer( (uint8_t *)&encArray[0] , ENC_ARRAY_SIZE_BYTES);
+		}
 	}
 }
-void test_pid_class(){
+void test_pid_curr_speed(){
 	uint16_t duty = 1800;
 	uint16_t duty_adc = duty/2;;
 
@@ -598,6 +676,8 @@ void test_pid_class(){
 
 	HAL_ADC_Start_IT(&hadc2);
 	HAL_TIM_OC_Start(&htim2, TIM_CHANNEL_3);
+	HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
+
 	while(true);
 }
 
@@ -653,7 +733,8 @@ int main(void)
 //  test_SYNC_PWM_ADC();
 //  test_pid();
   //test_enc_meas();
-  test_pid_class();
+  //test_pid_class();
+  test_pid_curr_speed();
 
   /* USER CODE END 2 */
 
