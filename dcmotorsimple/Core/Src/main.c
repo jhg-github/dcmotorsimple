@@ -605,15 +605,54 @@ void SystemClock_Config(void);
 #define ENC_ARRAY_SIZE_N (8000)
 #define ENC_ARRAY_SIZE_BYTES (ENC_ARRAY_SIZE_N*2)
 static uint16_t encArray[ENC_ARRAY_SIZE_N];
+static float currentSetpointArray[ENC_ARRAY_SIZE_N];
 static volatile uint16_t index = 0;
 #define SPEED_LOOP_N (40)	// 20KHz / 40 -> 500Hz for speed control
-static volatile uint32_t speed_loop_counter = 0;
+static volatile uint32_t speed_loop_counter = SPEED_LOOP_N;
 
 pid_Class pid_current;
-static volatile int16_t output;
+pid_Class pid_speed;
 void pid_isr(__IO uint16_t adcValue){
 	uint16_t encoder;
+	static uint16_t last_encoder = 0;
+	uint16_t encoder_speed;
+	int16_t output;
+	float current_setpoint;
 
+	// speed loop
+	if(++speed_loop_counter >= SPEED_LOOP_N){
+		speed_loop_counter = 0;
+		encoder = __HAL_TIM_GET_COUNTER(&htim3);
+		encArray[index] = encoder;
+
+
+//		if(encoder > 1){
+//			pid_Set_Setpoint(&pid_current, 5.0F);
+//		}
+		if(index == ENC_ARRAY_SIZE_N){
+			HAL_ADC_Stop_IT(&hadc2);
+			LL_GPIO_ResetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
+			HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+			HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
+			HAL_TIM_OC_Stop(&htim2, TIM_CHANNEL_3);
+			LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
+			LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
+			com_Test_SendBuffer( (uint8_t *)&encArray[0] , ENC_ARRAY_SIZE_BYTES);
+			com_Test_SendBuffer( (uint8_t *)&currentSetpointArray[0] , ENC_ARRAY_SIZE_BYTES*2);
+			while(1);
+		}
+
+		encoder_speed = encoder - last_encoder;
+		last_encoder = encoder;
+		current_setpoint = pid_Calc_Output(&pid_speed, encoder_speed);
+		pid_Set_Setpoint(&pid_current, current_setpoint);
+
+		currentSetpointArray[index] = current_setpoint;
+
+		index++;
+	}
+
+	// current loop
 	if(pid_Get_Setpoint(&pid_current) >= 0){
 		output = 1800 + (int16_t)pid_Calc_Output(&pid_current, adcValue);
 	}else {
@@ -633,25 +672,7 @@ void pid_isr(__IO uint16_t adcValue){
 		__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, (3599 + output)/2);
 	}
 
-	if(++speed_loop_counter == SPEED_LOOP_N){
-		speed_loop_counter = 0;
-		encoder = __HAL_TIM_GET_COUNTER(&htim3);
-		encArray[index] = encoder;
-		index++;
-		if(encoder > 1){
-			pid_Set_Setpoint(&pid_current, 5.0F);
-		}
-		if(index == ENC_ARRAY_SIZE_N){
-			HAL_ADC_Stop_IT(&hadc2);
-			LL_GPIO_ResetOutputPin(EN_B_GPIO_Port, EN_B_Pin);
-			HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
-			HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
-			HAL_TIM_OC_Stop(&htim2, TIM_CHANNEL_3);
-			LL_GPIO_ResetOutputPin(IN1_B_GPIO_Port, IN1_B_Pin);
-			LL_GPIO_ResetOutputPin(IN2_B_GPIO_Port, IN2_B_Pin);
-			com_Test_SendBuffer( (uint8_t *)&encArray[0] , ENC_ARRAY_SIZE_BYTES);
-		}
-	}
+
 }
 void test_pid_curr_speed(){
 	uint16_t duty = 1800;
@@ -659,6 +680,9 @@ void test_pid_curr_speed(){
 
 	pid_Ctor(&pid_current, 1.2F, 1221.0F, 0.0F, 0.00005F, 1799.0F, -1799.0F);
 	pid_Set_Setpoint(&pid_current, 500.0F);
+
+	pid_Ctor(&pid_speed, 24.0F, 16.0F, 0.0F, 0.002F, 1799.0F, 0.0F);
+	pid_Set_Setpoint(&pid_speed, 10.0F);
 
 	HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED);
 	HAL_OPAMP_SelfCalibrate(&hopamp2);

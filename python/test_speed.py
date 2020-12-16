@@ -6,14 +6,15 @@ import numpy as np
 
 DATA_SIZE_N = 8000
 DATA_SIZE_BYTES = 2
-N = DATA_SIZE_N*DATA_SIZE_BYTES*1  # 1 buffers, speed
+N = DATA_SIZE_N*DATA_SIZE_BYTES
+N2 = DATA_SIZE_N*4  # 1 buffers, speed
 Fs = 500
 
 ser = serial.Serial('/dev/ttyACM0', 115200, timeout=30)
 ser.read_all()
 ser.flushInput()
 ser.flushOutput()
-serBuffer = ser.read(N)
+serBuffer = ser.read(N+N2)
 # print(serBuffer)
 
 sub_fmt = '<H'
@@ -23,6 +24,14 @@ serBuffer_uint = []
 while offset < N:
     serBuffer_uint.append( struct.unpack_from(sub_fmt, serBuffer, offset)[0] )
     offset += sub_size
+
+sub_fmt = '<f'
+sub_size = struct.calcsize(sub_fmt)
+serBuffer_float = []
+while offset < N+N2:
+    serBuffer_float.append( struct.unpack_from(sub_fmt, serBuffer, offset)[0] )
+    offset += sub_size
+
 
 # middle_index=len(serBuffer_uint)//2
 # encoder=serBuffer_uint[:middle_index]
@@ -53,6 +62,8 @@ print(type(encoder_diff))
 # plt.plot(t,encoder,'.-') 
 plt.plot(t,encoder_diff,'.-') 
 plt.plot(t, np.convolve(encoder_diff, np.ones(50)/50, mode='full')[:DATA_SIZE_N])
+plt.plot(t,serBuffer_float,'.-') 
+plt.plot(t, np.convolve(serBuffer_float, np.ones(50)/50, mode='full')[:DATA_SIZE_N])
 # plt.step(t,output, where='post')
 plt.tight_layout()
 plt.grid()
