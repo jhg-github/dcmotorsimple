@@ -11,7 +11,8 @@ N2 = DATA_SIZE_N*4  # 1 buffers, speed
 Fs = 500
 
 ser = serial.Serial('/dev/ttyACM0', 115200, timeout=30)
-ser.read_all()
+time.sleep(0.2) # added because it returns from serial.Serial before the port is really opened so the 
+                # following functions wouldn't have any effect
 ser.flushInput()
 ser.flushOutput()
 serBuffer = ser.read(N+N2)

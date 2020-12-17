@@ -3,6 +3,7 @@ import struct
 import matplotlib.pyplot as plt 
 import statistics 
 import numpy as np
+import time
 
 
 DATA_SIZE_BYTES = 2
@@ -10,7 +11,8 @@ N = 8000*DATA_SIZE_BYTES*2  # 2 buffers, adc and output
 Fs = 20000
 
 ser = serial.Serial('/dev/ttyACM0', 115200, timeout=10)
-ser.read_all()
+time.sleep(0.2) # added because it returns from serial.Serial before the port is really opened so the 
+                # following functions wouldn't have any effect
 ser.flushInput()
 ser.flushOutput()
 serBuffer = ser.read(N)
