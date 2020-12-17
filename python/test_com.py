@@ -27,7 +27,7 @@ while offset < N:
     offset += sub_size
 
 middle_index=len(serBuffer_uint)//2
-adcBuffer_uint=serBuffer_uint[:middle_index]
+adcBuffer=serBuffer_uint[:middle_index]
 outBuffer_uint=serBuffer_uint[middle_index:]
 
 
@@ -46,8 +46,8 @@ outBuffer_uint=serBuffer_uint[middle_index:]
 # print('stdev8', statistics.stdev(mavg8))
 # plt.plot(mavg8,'.') 
 
-t = [ i/Fs for i in range(len(adcBuffer_uint))]
-mA = [ ((((i * 3300) / 4096) / 16) / 0.05) for i in adcBuffer_uint]
+t = [ i/Fs for i in range(len(adcBuffer))]
+mA = [ ((((i * 3300) / 4096) / 16) / 0.05) for i in adcBuffer]
 # output = [ i - 1800 for i in outBuffer_uint]
 output = outBuffer_uint
 
@@ -61,8 +61,10 @@ for i in range(len(t)):
 #     log_file.write('t [s]; current [mA]\n')
 #     log_file.writelines(rows)   
 
-plt.plot(t,mA,'.-') 
-plt.step(t,output, where='post')
+plt.step(t,output, label='output', where='post')
+# plt.plot(t,mA,'.-', label='mA') 
+plt.plot(t,adcBuffer,'.-', label='adcBuffer') 
 plt.tight_layout()
 plt.grid()
+plt.legend()
 plt.show()

@@ -25,6 +25,7 @@ struct pid_Class{
 void pid_Ctor(pid_Class * me, float kp, float ki, float kd, float ts, float upper_limit, float lower_limit);
 void pid_Set_Setpoint(pid_Class * me, float setpoint);
 float pid_Get_Setpoint(pid_Class * me);
+void pid_Set_Limits(pid_Class * me, float upper_limit, float lower_limit);
 float pid_Calc_Output(pid_Class * me, float input);
 
 #endif /* PID_H_ */

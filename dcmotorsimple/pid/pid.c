@@ -29,10 +29,16 @@ float pid_Get_Setpoint(pid_Class * me){
 	return me->setpoint;
 }
 
+void pid_Set_Limits(pid_Class * me, float upper_limit, float lower_limit){
+	me->upper_limit = upper_limit;
+	me->lower_limit = lower_limit;
+}
+
 float pid_Calc_Output(pid_Class * me, float input){
 	float error;
 	float proportional;
 	float integral;
+	float output;
 
 	error = me->setpoint - input;
 	proportional = error * me->kp;
@@ -42,7 +48,13 @@ float pid_Calc_Output(pid_Class * me, float input){
 	}else if (integral < me->lower_limit){
 		integral = me->lower_limit;
 	}
+	output = proportional + integral;
+	if(output > me->upper_limit){
+		output = me->upper_limit;
+	}else if (output < me->lower_limit){
+		output = me->lower_limit;
+	}
 	me->last_error = error;
 	me->last_integral = integral;
-	return proportional + integral;
+	return output;
 }

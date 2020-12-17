@@ -552,7 +552,17 @@ void pid_isr(__IO uint16_t adcValue){
 		signedAdcValue = -adcValue;
 	}
 
+	if(signedAdcValue > 10){
+		pid_Set_Limits(&pid_current, 1799.0F, 10);
+	} else if(signedAdcValue < -10){
+		pid_Set_Limits(&pid_current, -10, -1799.0F);
+	} else {
+		pid_Set_Limits(&pid_current, 1799.0F, -1799.0F);
+	}
+
 	pidOutput = (int16_t)pid_Calc_Output(&pid_current, signedAdcValue);
+
+
 	output = 1800 + pidOutput;
 
 	if(output > 3599.0F){
