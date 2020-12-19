@@ -3,6 +3,9 @@ import struct
 import matplotlib.pyplot as plt 
 import statistics 
 import numpy as np
+import time
+
+
 
 DATA_SIZE_N = 8000
 DATA_SIZE_BYTES = 2
@@ -39,15 +42,12 @@ while offset < N+N2:
 # outBuffer_uint=serBuffer_uint[middle_index:]
 encoder=serBuffer_uint
 
-
+encoder = np.asarray(encoder)
 t = [ i/Fs for i in range(len(encoder))]
 encoder_diff = np.diff(encoder)
 encoder_diff = np.insert(encoder_diff,0,0)
 encoder_diff = encoder_diff.tolist()
-for i,value in enumerate(encoder_diff):
-    if value < 0:
-        encoder_diff[i]=0
-print(type(encoder_diff))
+
 # mA = [ ((((i * 3300) / 4096) / 16) / 0.05) for i in adcBuffer_uint]
 # output = [ i - 1800 for i in outBuffer_uint]
 # output = outBuffer_uint
@@ -60,12 +60,15 @@ print(type(encoder_diff))
 #     log_file.write('t [s]; speed [encoder diff @ 500Hz]\n')
 #     log_file.writelines(rows)   
 
-# plt.plot(t,encoder,'.-') 
-plt.plot(t,encoder_diff,'.-') 
-plt.plot(t, np.convolve(encoder_diff, np.ones(50)/50, mode='full')[:DATA_SIZE_N])
-plt.plot(t,serBuffer_float,'.-') 
-plt.plot(t, np.convolve(serBuffer_float, np.ones(50)/50, mode='full')[:DATA_SIZE_N])
+
+plt.plot(t,serBuffer_float, label='current sp') 
+plt.plot(t, np.convolve(serBuffer_float, np.ones(50)/50, mode='full')[:DATA_SIZE_N], label='current sp')
+plt.plot(t,encoder_diff, label='encoder_diff') 
+plt.plot(t, np.convolve(encoder_diff, np.ones(50)/50, mode='full')[:DATA_SIZE_N], label='encoder_diff')
+# plt.plot(t,encoder) 
+
 # plt.step(t,output, where='post')
 plt.tight_layout()
+plt.legend()
 plt.grid()
 plt.show()
