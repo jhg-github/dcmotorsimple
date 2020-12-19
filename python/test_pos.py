@@ -52,20 +52,20 @@ encoder_diff = encoder_diff.tolist()
 # output = [ i - 1800 for i in outBuffer_uint]
 # output = outBuffer_uint
 
-rows=[]
-for i in range(len(t)):
-    rows.append('{};{}\n'.format(t[i],encoder[i]))
-filename = 'pos_v15.csv'
-with open(filename, mode='w', newline='') as log_file:
-    log_file.write('t [s]; pos [encoder @ 500Hz, v=15]\n')
-    log_file.writelines(rows)   
+# rows=[]
+# for i in range(len(t)):
+#     rows.append('{};{}\n'.format(t[i],encoder_diff[i]))
+# filename = 'speed_50.csv'
+# with open(filename, mode='w', newline='') as log_file:
+#     log_file.write('t [s]; speed [encoder diff @ 500Hz]\n')
+#     log_file.writelines(rows)   
 
 
-# plt.plot(t,serBuffer_float, label='current sp') 
-# plt.plot(t, np.convolve(serBuffer_float, np.ones(50)/50, mode='full')[:DATA_SIZE_N], label='current sp')
-# plt.plot(t,encoder_diff, label='encoder_diff') 
-# plt.plot(t, np.convolve(encoder_diff, np.ones(50)/50, mode='full')[:DATA_SIZE_N], label='encoder_diff')
-plt.plot(t,encoder) 
+plt.plot(t,serBuffer_float, label='current sp') 
+plt.plot(t, np.convolve(serBuffer_float, np.ones(50)/50, mode='full')[:DATA_SIZE_N], label='current sp')
+plt.plot(t,encoder_diff, label='encoder_diff') 
+plt.plot(t, np.convolve(encoder_diff, np.ones(50)/50, mode='full')[:DATA_SIZE_N], label='encoder_diff')
+# plt.plot(t,encoder) 
 
 # plt.step(t,output, where='post')
 plt.tight_layout()
