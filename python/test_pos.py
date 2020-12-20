@@ -61,11 +61,11 @@ encoder_diff = encoder_diff.tolist()
 #     log_file.writelines(rows)   
 
 
-plt.plot(t,serBuffer_float, label='current sp') 
-plt.plot(t, np.convolve(serBuffer_float, np.ones(50)/50, mode='full')[:DATA_SIZE_N], label='current sp')
-plt.plot(t,encoder_diff, label='encoder_diff') 
+# plt.plot(t,serBuffer_float, label='speed sp') 
+plt.plot(t, np.convolve(serBuffer_float, np.ones(50)/50, mode='full')[:DATA_SIZE_N], label='speed sp')
+# plt.plot(t,encoder_diff, label='encoder_diff') 
 plt.plot(t, np.convolve(encoder_diff, np.ones(50)/50, mode='full')[:DATA_SIZE_N], label='encoder_diff')
-# plt.plot(t,encoder) 
+plt.plot(t,encoder, label='encoder') 
 
 # plt.step(t,output, where='post')
 plt.tight_layout()

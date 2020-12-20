@@ -29,6 +29,12 @@ float pid_Get_Setpoint(pid_Class * me){
 	return me->setpoint;
 }
 
+void pid_Set_Gains(pid_Class * me, float kp, float ki, float kd){
+	me->kp = kp;
+	me->ki = ki;
+	me->kd = kd;
+}
+
 void pid_Set_Limits(pid_Class * me, float upper_limit, float lower_limit){
 	me->upper_limit = upper_limit;
 	me->lower_limit = lower_limit;
